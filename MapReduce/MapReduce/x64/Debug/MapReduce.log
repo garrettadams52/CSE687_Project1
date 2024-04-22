@@ -1,2 +1,3 @@
-﻿  Map.cpp
-  MapReduce.vcxproj -> C:\Users\cmuzz\source\repos\MapReduce\x64\Debug\MapReduce.exe
+﻿  WorkFlow.cpp
+C:\Users\garrettadams\source\Repos\CSE687_Project1\MapReduce\MapReduce\WorkFlow.cpp(17,12): warning C4101: 'reducer': unreferenced local variable
+  MapReduce.vcxproj -> C:\Users\garrettadams\source\repos\CSE687_Project1\MapReduce\x64\Debug\MapReduce.exe
