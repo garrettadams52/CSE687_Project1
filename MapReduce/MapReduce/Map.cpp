@@ -1,37 +1,29 @@
+#include "FileManagement.h"
 #include <iostream>
 #include <string>
-#include <fstream>
 #include <sstream>
 #include <algorithm>
 #include <cctype>
+#include <vector>
 
 using namespace std;
 
-// Function to process words: remove punctuation and convert to lowercase
-string processWord(string word) {
-    word.erase(remove_if(word.begin(), word.end(), [](char c) { return !isalpha(c); }), word.end());
-    transform(word.begin(), word.end(), word.begin(), ::tolower);
-    return word;
-}
+// Function declarations
+string processWord(string word);
 
 class Map {
 private:
-    ofstream outFile;
-    string tempDirectory;
+    string tempFilePath;
+    FileManagement fileMgr; // Instance of FileManagement to handle file operations
+    vector<string> tempResults; // Buffer to store temporary results
 
 public:
-    Map(const string& tempDir) : tempDirectory(tempDir) { // Ensure tempDirectory is initialized with tempDir
-        string tempFilePath = tempDirectory + "\\temp_results.txt"; // Now tempDirectory has the correct value
-        outFile.open(tempFilePath);
-        if (!outFile.is_open()) {
-            throw runtime_error("Failed to open temporary file: " + tempFilePath);
-        }
+    Map(const string& tempDir) : tempFilePath(tempDir + "/temp_results.txt") {
+        // Do not open a file here; defer file operations to the FileManagement class
     }
 
     ~Map() {
-        if (outFile.is_open()) {
-            outFile.close(); // Ensure the file is closed at the end
-        }
+        fileMgr.writeFileLines(tempFilePath, tempResults); // Write buffered results to temporary file
     }
 
     void map(const string& value) {
@@ -40,36 +32,17 @@ public:
         while (ss >> word) {
             word = processWord(word);
             if (!word.empty()) {
-                // Write each processed word followed by "1" in the desired format
-                outFile << "(" << word << ", 1)\n";
+                tempResults.push_back("(" + word + ", 1)"); // Use a buffer instead of writing to file immediately
             }
         }
     }
 };
 
-
-int main() {
-    string inputFilePath, tempDir;
-
-    cout << "Enter the path to the input file:\n";
-    getline(cin, inputFilePath);
-    cout << "Enter the directory to store temporary files:\n";
-    getline(cin, tempDir);
-
-    Map mapper(tempDir);
-
-    ifstream inFile(inputFilePath);
-    if (!inFile.is_open()) {
-        cerr << "Could not open file: " << inputFilePath << endl;
-        return 1;
-    }
-
-    string line;
-    while (getline(inFile, line)) {
-        mapper.map(line);
-    }
-
-    cout << "Processing completed. Check the temporary files in " << tempDir << endl;
-
-    return 0;
+// Function implementations
+string processWord(string word) {
+    word.erase(remove_if(word.begin(), word.end(), [](char c) { return !isalpha(c); }), word.end());
+    transform(word.begin(), word.end(), word.begin(), ::tolower);
+    return word;
 }
+
+// The main function can remain the same as it is in your original implementation
