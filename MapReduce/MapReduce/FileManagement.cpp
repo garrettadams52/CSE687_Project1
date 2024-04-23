@@ -21,7 +21,7 @@ std::vector<std::string> FileManagement::getAllFiles() const {
 std::vector<std::string> FileManagement::readFile(const std::string& filePath) const {
     std::ifstream file(filePath);
     if (!file) {
-        //std::cerr << "Failed to open file: " << filePath << std::endl;
+        std::cerr << "Failed to open file: " << filePath << std::endl;
         return {};
     }
 
@@ -30,55 +30,52 @@ std::vector<std::string> FileManagement::readFile(const std::string& filePath) c
     while (getline(file, line)) {
         if (!line.empty()) {
             lines.push_back(line);
-            //std::cout << "Line read: '" << line.substr(0, std::min(line.size(), size_t(50))) << "...'" << std::endl;
         }
     }
 
-    if (lines.empty()) {
-        //std::cout << "No lines read from file: " << filePath << std::endl;
-    }
-    else {
-        //std::cout << "Read " << lines.size() << " lines from file: " << filePath << std::endl;
-    }
 
     file.close();
     return lines;
 }
 
-void FileManagement::writeToTemp(const std::string& fileName, const std::string& content) const {
-    std::ofstream file(tempDirectory + "/" + fileName, std::ios::app);
-    file << content << std::endl;
-    file.close();
-}
-
-void FileManagement::writeToOutput(const std::string& fileName, const std::string& content) const {
-    std::ofstream file(outputDirectory + "/" + fileName);
-    file << content;
-    file.close();
-}
-
-bool FileManagement::checkDirectory(const std::string& dir) const {
-    return fs::exists(dir) && fs::is_directory(dir);
-}
 
 std::string FileManagement::getTempDirectory() const {
     return tempDirectory;
 }
 
+std::string FileManagement::getOutputDirectory() const {
+    return outputDirectory;
+}
 
-//This needs fixed
-void FileManagement::clearDirectory(const std::string& dirPath) {
+
+void FileManagement::clearFiles(const std::string& dirPath, const std::vector<std::string>& fileNames) {
     try {
-        // Check if the directory exists and is not empty
-        if (fs::exists(dirPath) && fs::is_directory(dirPath) && !fs::is_empty(dirPath)) {
-            // Remove all contents of the directory
+        if (fs::exists(dirPath) && fs::is_directory(dirPath)) {
             for (const auto& entry : fs::directory_iterator(dirPath)) {
-                fs::remove_all(entry);
+                if (std::find(fileNames.begin(), fileNames.end(), entry.path().filename()) != fileNames.end()) {
+                    fs::remove(entry);
+                    std::cout << "Removed file: " << entry.path() << std::endl;
+                }
             }
-            std::cout << "Cleared directory: " << dirPath << std::endl;
+            std::cout << "Specific files cleared in directory: " << dirPath << std::endl;
         }
     }
     catch (const fs::filesystem_error& e) {
-        std::cerr << "Error clearing directory " << dirPath << ": " << e.what() << std::endl;
+        std::cerr << "Error clearing specific files in directory " << dirPath << ": " << e.what() << std::endl;
     }
+}
+
+void FileManagement::writeFile(const std::string& filePath, const std::string& content, bool append) {
+    std::ofstream file(filePath, append ? std::ios::app : std::ios::out);
+    if (!file) {
+        std::cerr << "Unable to open file for writing: " << filePath << std::endl;
+        return;
+    }
+    file << content;
+    file.close();
+}
+
+void FileManagement::createEmptyFile(const std::string& filePath) {
+    std::ofstream file(filePath);
+    file.close();
 }

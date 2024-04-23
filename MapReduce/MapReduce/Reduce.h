@@ -4,16 +4,16 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "FileManagement.h"
 
 class Reduce {
 public:
-    Reduce(const std::string& inputFile, const std::string& outputDir);
+    explicit Reduce(FileManagement* fileManager);
     void reduce();
 private:
-    std::string inputFile;
-    std::string outputDir;
+    FileManagement* fileManager;
+    std::string outputPath;  
     void exportResult(const std::string& key, int result);
-    void markSuccess();
 };
 
 #endif // REDUCE_H

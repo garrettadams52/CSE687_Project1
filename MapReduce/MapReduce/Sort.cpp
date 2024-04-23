@@ -3,47 +3,45 @@
 #include <sstream>
 #include <algorithm>
 
-Sort::Sort(const std::string& inputFile, const std::string& outputFile)
-    : inputFile(inputFile), outputFile(outputFile) {}
+Sort::Sort(FileManagement* fileManager)
+    : fileManager(fileManager) {}
 
 void Sort::sortAndAggregate() {
-    std::vector<std::pair<std::string, int>> entries;
-    std::string line;
+    std::string inputPath = fileManager->getTempDirectory() + "/temp_output.txt";
+    std::string outputPath = fileManager->getTempDirectory() + "/sorted_aggregated_output.txt";
 
-    // Read entries from the intermediate file
-    std::ifstream inFile(inputFile);
-    while (getline(inFile, line)) {
+    std::vector<std::pair<std::string, int>> entries;
+    std::vector<std::string> lines = fileManager->readFile(inputPath);
+
+    for (const std::string& line : lines) {
         std::string word;
         int count;
         std::stringstream ss(line);
-        ss.ignore(1, '(');           // Ignore the opening parenthesis
-        getline(ss, word, ',');      // Get the word
-        ss.ignore(2, ' ');           // Ignore the comma and space
-        ss >> count;                 // Get the count
-        ss.ignore(2, ')');           // Ignore the closing parenthesis
+        ss.ignore(1, '(');
+        getline(ss, word, ',');
+        ss.ignore(2, ' ');
+        ss >> count;
+        ss.ignore(2, ')');
         entries.emplace_back(word, count);
     }
-    inFile.close();
 
-    // Sort entries by word
     std::sort(entries.begin(), entries.end(), [](const auto& a, const auto& b) {
         return a.first < b.first;
         });
 
-    // Aggregate sorted data
-    auto aggregated = aggregateData(entries);
+    std::map<std::string, std::vector<int>> aggregated = aggregateData(entries);
 
-    // Output to file
-    std::ofstream outFile(outputFile);
+    std::stringstream outputContent;
     for (const auto& [word, counts] : aggregated) {
-        outFile << "(" << word << ", [";
+        outputContent << "(" << word << ", [";
         for (size_t i = 0; i < counts.size(); ++i) {
-            outFile << counts[i];
-            if (i < counts.size() - 1) outFile << ", ";
+            outputContent << counts[i];
+            if (i < counts.size() - 1) outputContent << ", ";
         }
-        outFile << "])\n";
+        outputContent << "])\n";
     }
-    outFile.close();
+
+    fileManager->writeFile(outputPath, outputContent.str(), false); 
 }
 
 std::map<std::string, std::vector<int>> Sort::aggregateData(const std::vector<std::pair<std::string, int>>& data) {

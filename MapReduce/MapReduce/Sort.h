@@ -4,15 +4,16 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "FileManagement.h"
+
 
 class Sort {
 public:
-    Sort(const std::string& inputFile, const std::string& outputFile);
+    explicit Sort(FileManagement* fileManager);
     void sortAndAggregate();
 
 private:
-    std::string inputFile;
-    std::string outputFile;
+    FileManagement* fileManager;
     std::map<std::string, std::vector<int>> aggregateData(const std::vector<std::pair<std::string, int>>& data);
 };
 

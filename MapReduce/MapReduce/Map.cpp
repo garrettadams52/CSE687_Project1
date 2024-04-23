@@ -6,7 +6,6 @@
 
 Map::Map(FileManagement* fileManager, size_t bufferSize)
     : fileManager(fileManager), bufferSize(bufferSize) {
-    // Construct the full path for the output file and open it
     std::string fullPath = fileManager->getTempDirectory() + "\\temp_output.txt";
     outputFile.open(fullPath, std::ios::app);
     if (!outputFile) {
@@ -15,7 +14,7 @@ Map::Map(FileManagement* fileManager, size_t bufferSize)
 }
 
 Map::~Map() {
-    flushBuffer();  // Ensure all data is flushed at the end
+    flushBuffer();  
     if (outputFile.is_open()) {
         outputFile.close();
     }
@@ -35,9 +34,7 @@ void Map::map(const std::string& fileName, const std::string& content) {
 }
 
 void Map::exportToFile(const std::string& fileName, const std::string& word) {
-    // Buffer the output in the format (word, 1)
     buffer.push_back("(" + word + ", 1)");
-    // Check if the buffer size exceeds the threshold
     if (buffer.size() >= bufferSize) {
         flushBuffer();
     }
@@ -47,5 +44,5 @@ void Map::flushBuffer() {
     for (const auto& entry : buffer) {
         outputFile << entry << std::endl;
     }
-    buffer.clear();  // Clear
+    buffer.clear();  
 }

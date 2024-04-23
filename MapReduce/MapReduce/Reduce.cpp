@@ -1,55 +1,49 @@
 #include "Reduce.h"
 #include <fstream>
-#include <iostream>
 #include <sstream>
+#include <iostream>
 
-Reduce::Reduce(const std::string& inputFile, const std::string& outputDir)
-    : inputFile(inputFile), outputDir(outputDir) {}
-
+Reduce::Reduce(FileManagement* fileManager)
+    : fileManager(fileManager) {
+    outputPath = fileManager->getOutputDirectory() + "/final_output.txt";
+}
 
 void Reduce::reduce() {
-    std::ifstream inFile(inputFile);
-    std::string line;
+    std::string inputPath = fileManager->getTempDirectory() + "/sorted_aggregated_output.txt";
+    std::vector<std::string> lines = fileManager->readFile(inputPath);
 
-    while (getline(inFile, line)) {
-        std::string key;
-        std::vector<int> values;
+    for (const std::string& line : lines) {
         std::istringstream iss(line);
+        std::string key;
         char discard;
+        std::vector<int> values;
 
-        iss >> discard; // Discard '('
-        getline(iss, key, ','); // Read key
-        key.erase(std::remove_if(key.begin(), key.end(), ::isspace), key.end()); // Remove spaces
+        iss >> discard; 
+        getline(iss, key, ','); 
+        key.erase(std::remove_if(key.begin(), key.end(), ::isspace), key.end()); 
 
-        // Check for empty keys, which may indicate parsing issues
         if (key.empty()) {
             std::cerr << "Found an empty key in line: " << line << std::endl;
             continue;
         }
 
-        // Parse the vector of integers
-        iss >> discard; // Discard '['
+        iss >> discard; 
         int num;
         while (iss >> num) {
             values.push_back(num);
-            iss >> discard; // Discard ',' or ']'
+            iss >> discard; 
         }
 
         int sum = 0;
         for (int value : values) {
             sum += value;
         }
+
         exportResult(key, sum);
     }
 }
 
 void Reduce::exportResult(const std::string& key, int result) {
-    std::ofstream outFile(outputDir + "/reduced_output.txt", std::ios::app);
-    outFile << "(" << key << ", " << result << ")" << std::endl;
-    outFile.close();
-}
-
-void Reduce::markSuccess() {
-    std::ofstream successFile(outputDir + "/SUCCESS");
-    successFile.close();
+    std::string resultLine = "(" + key + ", " + std::to_string(result) + ")\n";
+    fileManager->writeFile(outputPath, resultLine);
 }

@@ -3,31 +3,27 @@
 #include "Sort.h"
 #include "Reduce.h"
 
-// Constructor initializes the directories used throughout the workflow
 Workflow::Workflow(const std::string& inputDir, const std::string& tempDir, const std::string& outputDir)
     : inputDirectory(inputDir), tempDirectory(tempDir), outputDirectory(outputDir) {}
 
-// Main execution function for the workflow
 void Workflow::run() {
-    std::cout << "Workflow running..." << std::endl;
-
+    size_t bufferSize = 1000;
     FileManagement fileManagement(inputDirectory, tempDirectory, outputDirectory);
 
+    std::vector<std::string> filesToClear = { "temp_output.txt", "final_output.txt", "sorted_aggregated_output.txt" };
+    fileManagement.clearFiles(tempDirectory, filesToClear);
+    Map mapper(&fileManagement, bufferSize);
+    Sort sorter(&fileManagement);
+    Reduce reducer(&fileManagement);
 
-    //fileManagement.clearDirectory(tempDirectory);
-    //fileManagement.clearDirectory(outputDirectory);
 
-    // Initialize file management and retrieve list of files
+
     auto files = fileManagement.getAllFiles();
     if (files.empty()) {
         std::cerr << "No files found in the input directory: " << inputDirectory << std::endl;
         return;
     }
 
-    // Initialize the map processor with the file management for directory handling
-    Map mapper(&fileManagement);
-
-    // Process each file
     for (const auto& file : files) {
         auto lines = fileManagement.readFile(file);
         for (const auto& line : lines) {
@@ -35,12 +31,7 @@ void Workflow::run() {
         }
     }
 
-
-    // After mapping is done
-    Sort sorter(tempDirectory + "/temp_output.txt", tempDirectory + "/sorted_aggregated_output.txt");
     sorter.sortAndAggregate();
-
-    Reduce reducer(tempDirectory + "/sorted_aggregated_output.txt", outputDirectory);
     reducer.reduce();
 
 }

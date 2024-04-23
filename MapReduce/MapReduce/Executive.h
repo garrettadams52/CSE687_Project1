@@ -11,6 +11,8 @@ public:
 
 private:
     Workflow workflow;
+    FileManagement fileManagement;
+    void markSuccess();
 };
 
 #endif // EXECUTIVE_H
