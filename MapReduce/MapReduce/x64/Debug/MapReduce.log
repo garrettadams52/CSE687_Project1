@@ -1,9 +1,9 @@
 ﻿  Executive.cpp
   FileManagement.cpp
   main.cpp
+C:\Users\garrettadams\source\Repos\CSE687_Project1\MapReduce\MapReduce\FileManagement.cpp(66,12): error C2065: 'files': undeclared identifier
   Map.cpp
   Reduce.cpp
   Sort.cpp
   WorkFlow.cpp
   Generating Code...
-  MapReduce.vcxproj -> C:\Users\Patty\Documents\GitHub\CSE687_Project1\MapReduce\x64\Debug\MapReduce.exe
