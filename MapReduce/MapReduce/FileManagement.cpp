@@ -63,6 +63,7 @@ void FileManagement::clearFiles(const std::string& dirPath, const std::vector<st
     catch (const fs::filesystem_error& e) {
         std::cerr << "Error clearing specific files in directory " << dirPath << ": " << e.what() << std::endl;
     }
+    return files;
 }
 
 void FileManagement::writeFile(const std::string& filePath, const std::string& content, bool append) {
