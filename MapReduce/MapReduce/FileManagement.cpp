@@ -1,47 +1,48 @@
 #include "FileManagement.h"
-#include <fstream>
 #include <iostream>
 
-FileManagement::FileManagement(const std::string& rootDir) {
-    ensureDirectory(rootDir);
-}
+FileManager::FileManager(std::size_t bufferSize)
+    : bufferSize(bufferSize) {}
 
-void FileManagement::createFile(const std::string& filePath, const std::string& content) {
-    std::ofstream outFile(filePath);
-    if (outFile.is_open()) {
-        outFile << content;
-    }
-    else {
-        std::cerr << "Failed to open file for writing: " << filePath << std::endl;
-    }
-}
+FileManager::~FileManager() {}
 
-std::vector<std::string> FileManagement::readFile(const std::string& filePath) {
-    std::vector<std::string> lines;
-    std::ifstream inFile(filePath);
+std::string FileManager::readLine(const std::string& filePath) {
+    std::ifstream file(filePath);
     std::string line;
-    while (getline(inFile, line)) {
-        lines.push_back(line);
+
+    if (!file.is_open()) {
+        std::cerr << "Unable to open file: " << filePath << std::endl;
+        return "";
     }
-    return lines;
+
+    if (std::getline(file, line)) {
+        return line;
+    }
+    file.close();
+
+    return "";
 }
 
-std::vector<std::string> FileManagement::listFiles(const std::string& dirPath, const std::string& ext) {
-    std::vector<std::string> files;
-    for (const auto& entry : fs::directory_iterator(dirPath)) {
-        if (entry.is_regular_file() && entry.path().extension() == ext) {
-            files.push_back(entry.path().string());
-        }
+void FileManager::writeBufferToFile(const std::string& data, const std::string& filePath) {
+    buffer.push_back(data);
+
+    if (buffer.size() >= bufferSize) {
+        flushBuffer(filePath);
     }
-    return files;
 }
 
-bool FileManagement::exists(const std::string& path) {
-    return fs::exists(path);
-}
+void FileManager::flushBuffer(const std::string& filePath, bool append) {
+    std::ofstream file(filePath, append ? std::ios::app : std::ios::out);
 
-void FileManagement::ensureDirectory(const std::string& path) {
-    if (!fs::exists(path)) {
-        fs::create_directories(path);
+    if (!file.is_open()) {
+        std::cerr << "Unable to open file: " << filePath << std::endl;
+        return;
     }
+
+    for (const auto& line : buffer) {
+        file << line << std::endl;
+    }
+
+    buffer.clear();
+    file.close();
 }
