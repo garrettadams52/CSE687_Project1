@@ -2,30 +2,27 @@
 #define FILEMANAGEMENT_H
 
 #include <string>
-#include <filesystem>
 #include <vector>
-
-namespace fs = std::filesystem;
 
 class FileManagement {
 public:
-    // Constructor with the root directory
-    explicit FileManagement(const std::string& rootDir);
+    FileManagement(const std::string& inputDir, const std::string& tempDir, const std::string& outputDir);
 
-    // Create a file with content
-    void createFile(const std::string& filePath, const std::string& content);
+    std::vector<std::string> getAllFiles() const;
+    std::vector<std::string> readFile(const std::string& filePath) const;
+    void writeToTemp(const std::string& fileName, const std::string& content) const;
+    void writeToOutput(const std::string& fileName, const std::string& content) const;
+    bool checkDirectory(const std::string& dir) const;
+    void clearDirectory(const std::string& dirPath);
 
-    // Read a file into a vector of strings, each string a line
-    std::vector<std::string> readFile(const std::string& filePath);
 
-    // List all files in a directory matching a specific extension
-    std::vector<std::string> listFiles(const std::string& dirPath, const std::string& ext);
+    // Getter for temporary directory
+    std::string getTempDirectory() const;
 
-    // Check if a file or directory exists
-    bool exists(const std::string& path);
-
-    // Create a directory if it doesn't exist
-    void ensureDirectory(const std::string& path);
+private:
+    std::string inputDirectory;
+    std::string tempDirectory;
+    std::string outputDirectory;
 };
 
 #endif // FILEMANAGEMENT_H

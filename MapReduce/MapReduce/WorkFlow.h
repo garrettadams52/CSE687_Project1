@@ -4,7 +4,6 @@
 #include <string>
 #include "FileManagement.h"
 #include "Map.h"
-#include "Reduce.h"
 
 class Workflow {
 public:

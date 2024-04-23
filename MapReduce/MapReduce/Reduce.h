@@ -7,10 +7,13 @@
 
 class Reduce {
 public:
-    void reduce(const std::string& key, const std::vector<int>& values);
-
+    Reduce(const std::string& inputFile, const std::string& outputDir);
+    void reduce();
 private:
-    void exportToFile(const std::string& key, int result);
+    std::string inputFile;
+    std::string outputDir;
+    void exportResult(const std::string& key, int result);
+    void markSuccess();
 };
 
 #endif // REDUCE_H

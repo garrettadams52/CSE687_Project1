@@ -1,5 +1,5 @@
-#ifndef SORTER_H
-#define SORTER_H
+#ifndef SORT_H
+#define SORT_H
 
 #include <string>
 #include <vector>
@@ -7,20 +7,13 @@
 
 class Sort {
 public:
-    // Constructor
-    Sort();
-
-    // Loads data and performs sorting and aggregation from a specified file
-    void processFile(const std::string& filename);
-
-    // Retrieves the sorted and aggregated data
-    const std::map<std::string, std::vector<int>>& getAggregatedData() const;
+    Sort(const std::string& inputFile, const std::string& outputFile);
+    void sortAndAggregate();
 
 private:
-    std::map<std::string, std::vector<int>> aggregatedData;
-
-    // Utility function to parse and aggregate data from a line
-    void processLine(const std::string& line);
+    std::string inputFile;
+    std::string outputFile;
+    std::map<std::string, std::vector<int>> aggregateData(const std::vector<std::pair<std::string, int>>& data);
 };
 
-#endif // SORTER_H
+#endif // SORT_H
