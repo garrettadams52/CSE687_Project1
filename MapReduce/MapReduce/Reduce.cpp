@@ -46,4 +46,11 @@ void Reduce::reduce() {
 void Reduce::exportResult(const std::string& key, int result) {
     std::string resultLine = "(" + key + ", " + std::to_string(result) + ")\n";
     fileManager->writeFile(outputPath, resultLine);
+
+
+    inFile.close();
+
+    // Export the results
+    exportResults(wordCounts);
 }
+

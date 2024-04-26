@@ -1,3 +1,4 @@
+
 #include "FileManagement.h"
 #include <filesystem>
 #include <fstream>
@@ -78,4 +79,3 @@ void FileManagement::writeFile(const std::string& filePath, const std::string& c
 void FileManagement::createEmptyFile(const std::string& filePath) {
     std::ofstream file(filePath);
     file.close();
-}
