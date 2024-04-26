@@ -18,20 +18,20 @@ void Reduce::reduce() {
         char discard;
         std::vector<int> values;
 
-        iss >> discard; 
-        getline(iss, key, ','); 
-        key.erase(std::remove_if(key.begin(), key.end(), ::isspace), key.end()); 
+        iss >> discard;
+        getline(iss, key, ',');
+        key.erase(std::remove_if(key.begin(), key.end(), ::isspace), key.end());
 
         if (key.empty()) {
             std::cerr << "Found an empty key in line: " << line << std::endl;
             continue;
         }
 
-        iss >> discard; 
+        iss >> discard;
         int num;
         while (iss >> num) {
             values.push_back(num);
-            iss >> discard; 
+            iss >> discard;
         }
 
         int sum = 0;
@@ -46,11 +46,5 @@ void Reduce::reduce() {
 void Reduce::exportResult(const std::string& key, int result) {
     std::string resultLine = "(" + key + ", " + std::to_string(result) + ")\n";
     fileManager->writeFile(outputPath, resultLine);
-
-
-    inFile.close();
-
-    // Export the results
-    exportResults(wordCounts);
 }
 
