@@ -2,16 +2,18 @@
 #define REDUCE_H
 
 #include <string>
+#include <vector>
 #include <map>
+#include "FileManagement.h"
 
 class Reduce {
 public:
-    Reduce(const std::string& outputDir);
-    void reduce(const std::string& intermediateFilePath);
-
+    explicit Reduce(FileManagement* fileManager);
+    void reduce();
 private:
-    std::string outputDirectory;
-    void exportResults(const std::map<std::string, int>& wordCounts);
+    FileManagement* fileManager;
+    std::string outputPath;  
+    void exportResult(const std::string& key, int result);
 };
 
-#endif
+#endif // REDUCE_H

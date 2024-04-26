@@ -1,20 +1,26 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "FileManagement.h"
 #include <string>
+#include <unordered_map>
 #include <fstream>
-
-std::string processWord(std::string word);
+#include <vector>
 
 class Map {
-private:
-    std::ofstream outFile;
-    std::string tempDirectory;
-
 public:
-    Map(const std::string& tempDir);
+    Map(FileManagement* fileManager, size_t bufferSize = 1000);
     ~Map();
-    void map(const std::string& value);
+    void map(const std::string& fileName, const std::string& content);
+    void flushBuffer();  // Manually flush the buffer
+    void exportToFile(const std::string& fileName, const std::string& word);  // Declare this method
+
+
+private:
+    FileManagement* fileManager;
+    std::ofstream outputFile;
+    size_t bufferSize;
+    std::vector<std::string> buffer;  // Use a vector to buffer the output
 };
 
-#endif 
+#endif // MAP_H
