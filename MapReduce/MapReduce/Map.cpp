@@ -13,6 +13,7 @@ Map::Map(FileManagement* fileManager, size_t bufferSize)
     }
 }
 
+//Class destructor which flushes the input buffer and closes the temporary directory
 Map::~Map() {
     flushBuffer();
     if (outputFile.is_open()) {
@@ -27,6 +28,9 @@ void Map::map(const std::string& fileName, const std::string& content) {
         word.erase(std::remove_if(word.begin(), word.end(),
             [](unsigned char c) { return !std::isalpha(c); }), word.end());
         std::transform(word.begin(), word.end(), word.begin(), ::tolower);
+ program-with-documentation
+        //Sends word to member function exporToFile to place it inside a tuple
+main
         if (!word.empty()) {
             exportToFile(fileName, word);
         }
@@ -39,6 +43,7 @@ void Map::exportToFile(const std::string& fileName, const std::string& word) {
         flushBuffer();
     }
 }
+ program-with-documentation
 
 void Map::flushBuffer() {
     for (const auto& entry : buffer) {
@@ -47,4 +52,11 @@ void Map::flushBuffer() {
     buffer.clear();
 }
 
+main
 
+void Map::flushBuffer() {
+    for (const auto& entry : buffer) {
+        outputFile << entry << std::endl;
+    }
+    buffer.clear();  
+}

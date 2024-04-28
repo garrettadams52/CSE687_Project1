@@ -43,6 +43,17 @@ void Reduce::reduce() {
     }
 }
 
+program-with-documentation
+
+void Reduce::exportResults(const std::map<std::string, int>& wordCounts) {
+    std::ofstream outFile(outputDirectory + "/final_results.txt");
+    if (!outFile.is_open()) {
+        std::cerr << "Failed to open output file in directory: " << outputDirectory << std::endl;
+        return;
+    }
+
+
+main
 void Reduce::exportResult(const std::string& key, int result) {
     std::string resultLine = "(" + key + ", " + std::to_string(result) + ")\n";
     fileManager->writeFile(outputPath, resultLine);

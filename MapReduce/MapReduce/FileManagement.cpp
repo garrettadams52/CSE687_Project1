@@ -1,3 +1,13 @@
+program-with-documentation
+// Include necessary headers
+#include "File_Manager.h" // Custom header, potentially for a MapReduce implementation
+#include <fstream>     // Standard file I/O header
+#include <boost/filesystem.hpp>  // Header from Boost library for filesystem operations
+#include <boost/log/trivial.hpp> // Header from Boost library for logging
+
+// Define a namespace alias for boost::filesystem for easier and clearer usage
+namespace fs = boost::filesystem;
+
 
 #include "FileManagement.h"
 #include <filesystem>
@@ -5,6 +15,7 @@
 #include <iostream>
 
 namespace fs = std::filesystem;
+main
 
 FileManagement::FileManagement(const std::string& inputDir, const std::string& tempDir, const std::string& outputDir)
     : inputDirectory(inputDir), tempDirectory(tempDir), outputDirectory(outputDir) {}
