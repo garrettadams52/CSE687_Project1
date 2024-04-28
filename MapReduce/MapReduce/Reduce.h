@@ -4,14 +4,19 @@
 #include <string>
 #include <map>
 
+//This class performs the final portion of the word token counting process. It iterates through the n-tuples for each word, summing the
+//"1"s that denote each occurrence of the word into a single number representing the total occurrences of that word, and also removes
+//the original tuples denoting individual word tokens. Finally, it writes the modified results to an output file in the directory 
+//specified by the user.
+
 class Reduce {
 public:
-    Reduce(const std::string& outputDir);
-    void reduce(const std::string& intermediateFilePath);
-
+    explicit Reduce(FileManagement* fileManager);
+    void reduce();
 private:
-    std::string outputDirectory;
-    void exportResults(const std::map<std::string, int>& wordCounts);
+    FileManagement* fileManager;
+    std::string outputPath;  
+    void exportResult(const std::string& key, int result);
 };
 
 #endif

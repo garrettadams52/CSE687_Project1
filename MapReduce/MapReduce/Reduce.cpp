@@ -4,12 +4,14 @@
 #include <map>
 #include <sstream>
 
-Reduce::Reduce(const std::string& outputDir) : outputDirectory(outputDir) {}
+Reduce::Reduce(FileManagement* fileManager)
+    : fileManager(fileManager) {
+    outputPath = fileManager->getOutputDirectory() + "/final_output.txt";
+}
 
-void Reduce::reduce(const std::string& intermediateFilePath) {
-    std::ifstream inFile(intermediateFilePath);
-    std::map<std::string, int> wordCounts;
-    std::string line;
+void Reduce::reduce() {
+    std::string inputPath = fileManager->getTempDirectory() + "/sorted_aggregated_output.txt";
+    std::vector<std::string> lines = fileManager->readFile(inputPath);
 
     if (!inFile.is_open()) {
         std::cerr << "Could not open intermediate file: " << intermediateFilePath << std::endl;
@@ -49,7 +51,7 @@ void Reduce::exportResults(const std::map<std::string, int>& wordCounts) {
         return;
     }
 
-    for (const auto& pair : wordCounts) {
-        outFile << pair.first << ": " << pair.second << std::endl; 
-    }
+void Reduce::exportResult(const std::string& key, int result) {
+    std::string resultLine = "(" + key + ", " + std::to_string(result) + ")\n";
+    fileManager->writeFile(outputPath, resultLine);
 }

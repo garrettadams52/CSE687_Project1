@@ -5,43 +5,35 @@
 #include "Reduce.h"
 #include "Sorter.h"
 
-int main() {
-    std::string inputFilePath, tempDir, outputDir;
 
-    std::cout << "Enter the path to the input file:\n";
-    std::getline(std::cin, inputFilePath);
-    std::cout << "Enter the directory to store temporary files:\n";
-    std::getline(std::cin, tempDir);
-    std::cout << "Enter the directory to store the output file:\n";
-    std::getline(std::cin, outputDir);
+namespace fs = std::filesystem;
 
     //Map phase
     Map mapper(tempDir);
 
-    std::ifstream inFile(inputFilePath);
-    if (!inFile.is_open()) {
-        std::cerr << "Could not open file: " << inputFilePath << std::endl;
+int main() {
+    std::string inputLine;
+    std::string inputDirectory, tempDirectory, outputDirectory;
+
+    std::cout << "Enter the input file path, temporary directory, and output directory separated by spaces.\n";
+    std::cout << "Example: C:\\Path\\To\\InputFiles C:\\Path\\To\\Temp C:\\Path\\To\\Output\n";
+    std::getline(std::cin, inputLine);
+
+    std::istringstream iss(inputLine);
+    if (!(iss >> inputDirectory >> tempDirectory >> outputDirectory)) {
+        std::cerr << "Error: You must enter exactly three paths separated by spaces." << std::endl;
         return 1;
     }
 
-    std::string line;
-    while (std::getline(inFile, line)) {
-        mapper.map(line);
+
+    if (!fs::exists(inputDirectory) || !fs::is_directory(inputDirectory)) {
+        std::cerr << "Error: The specified input directory does not exist or is not accessible: \"" << inputDirectory << "\"\n";
+        return 1;
     }
-    inFile.close(); 
 
-    std::cout << "Mapping completed. Intermediate results are in " << tempDir << std::endl;
+    Executive exec(inputDirectory, tempDirectory, outputDirectory);
 
-    std::string tempFilePath = tempDir + "/temp_results.txt";
-
-    Sorter::sortAndPrepare(tempFilePath);
-
-    // Reduce phase
-    Reduce reducer(outputDir);
-    std::string intermediateFilePath = tempDir + "/temp_results.txt"; 
-    reducer.reduce(intermediateFilePath);
-
-    std::cout << "Reducing completed. Final results are in " << outputDir << std::endl;
+    exec.run();
 
     return 0;
 }
