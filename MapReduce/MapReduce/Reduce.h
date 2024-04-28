@@ -2,7 +2,9 @@
 #define REDUCE_H
 
 #include <string>
+#include <vector>
 #include <map>
+#include "FileManagement.h"
 
 //This class performs the final portion of the word token counting process. It iterates through the n-tuples for each word, summing the
 //"1"s that denote each occurrence of the word into a single number representing the total occurrences of that word, and also removes
@@ -19,4 +21,4 @@ private:
     void exportResult(const std::string& key, int result);
 };
 
-#endif
+#endif // REDUCE_H

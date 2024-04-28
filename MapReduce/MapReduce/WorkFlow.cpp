@@ -3,6 +3,7 @@
 #include "Sort.h"
 #include "Reduce.h"
 
+ program-with-documentation
 //This class manages the execution of the program that counts word instances in a directory of text files. To do this,
 //it instantiates members of the FileManagement, Map, Sort, and Reduce classes, and then calls their member functions
 //to carry out the tasks of the program.
@@ -36,10 +37,29 @@ void Workflow::run() {
     auto files = fileManagement.getAllFiles();
     //If there are no files in the specified input directory, prints error message informing the user of
     //this fact
+
+Workflow::Workflow(const std::string& inputDir, const std::string& tempDir, const std::string& outputDir)
+    : inputDirectory(inputDir), tempDirectory(tempDir), outputDirectory(outputDir) {}
+
+void Workflow::run() {
+    size_t bufferSize = 1000;
+    FileManagement fileManagement(inputDirectory, tempDirectory, outputDirectory);
+
+    std::vector<std::string> filesToClear = { "temp_output.txt", "final_output.txt", "sorted_aggregated_output.txt" };
+    fileManagement.clearFiles(tempDirectory, filesToClear);
+    Map mapper(&fileManagement, bufferSize);
+    Sort sorter(&fileManagement);
+    Reduce reducer(&fileManagement);
+
+
+
+    auto files = fileManagement.getAllFiles();
+ main
     if (files.empty()) {
         std::cerr << "No files found in the input directory: " << inputDirectory << std::endl;
         return;
     }
+ program-with-documentation
     //Iterates through every file in the input directory
     for (const auto& file : files) {
         //Initializes lines to value of next file in the directory using FileManagement member
@@ -49,16 +69,26 @@ void Workflow::run() {
         for (const auto& line : lines) {
             //Calls Map member function map (note lowercase name) and passes it a line of text from
             //the file to count and modify the word tokens in that line
+
+
+    for (const auto& file : files) {
+        auto lines = fileManagement.readFile(file);
+        for (const auto& line : lines) {
+ main
             mapper.map(file, line);  
         }
     }
 
+program-with-documentation
     //Once every word token from every line and file has been counted and placed in a tuple,
     //calls Sort member function sortAndAggregate to sort the words alphabetically and place each word
     //in an n-tuple representing each occurrence of that word with a "1"
     sorter.sortAndAggregate();
     //Calls Reduce member function reduce (note lowercase name) to transform the n-tuples created by sortAndAggregate
     //into tuples containing a word and the number of its occurrences in all the files of the input directory
+
+    sorter.sortAndAggregate();
+ main
     reducer.reduce();
 
 }

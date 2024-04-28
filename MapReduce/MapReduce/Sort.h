@@ -6,6 +6,7 @@
 #include <map>
 #include "FileManagement.h"
 
+ program-with-documentation
 //This class performs the second portion of the word token counting process. It aggreates all of the instances of each word
 //into an n-tuple containing that word as its first member, followed all occurrences of the word, each occurrence represented by a "1".
 //It also sorts these n-tuples alphabetically.
@@ -23,6 +24,16 @@ private:
     //Pointer to externally allocted FileManagement object
     FileManagement* fileManager;
     //Pushes aggregated n-tuples into a vector and returns the vector to a caller. Helper function to sortAndAggregate.
+
+
+class Sort {
+public:
+    explicit Sort(FileManagement* fileManager);
+    void sortAndAggregate();
+
+private:
+    FileManagement* fileManager;
+main
     std::map<std::string, std::vector<int>> aggregateData(const std::vector<std::pair<std::string, int>>& data);
 };
 

@@ -1,15 +1,12 @@
+#include "Executive.h"
 #include <iostream>
-#include <fstream>
 #include <string>
-#include "Map.h"
-#include "Reduce.h"
-#include "Sorter.h"
+#include <sstream>
+#include <filesystem>
 
 
 namespace fs = std::filesystem;
 
-    //Map phase
-    Map mapper(tempDir);
 
 int main() {
     std::string inputLine;
@@ -37,3 +34,5 @@ int main() {
 
     return 0;
 }
+
+   

@@ -5,6 +5,7 @@
 #include "FileManagement.h"
 #include "Map.h"
 
+program-with-documentation
 //This class manages the execution of the program that counts word instances in a directory of text files. To do this,
 //it instantiates members of the FileManagement, Map, Sort, and Reduce classes, and then calls their member functions
 //to carry out the tasks of the program.
@@ -23,6 +24,16 @@ private:
     //Stores the partial file path of the temporary directory
     std::string tempDirectory;
     //Stores the partial file name of the output directory
+
+class Workflow {
+public:
+    Workflow(const std::string& inputDir, const std::string& tempDir, const std::string& outputDir);
+    void run();
+
+private:
+    std::string inputDirectory;
+    std::string tempDirectory;
+ main
     std::string outputDirectory;
 };
 

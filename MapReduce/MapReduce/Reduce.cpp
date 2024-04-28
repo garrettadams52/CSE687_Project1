@@ -1,8 +1,7 @@
 #include "Reduce.h"
 #include <fstream>
-#include <iostream>
-#include <map>
 #include <sstream>
+#include <iostream>
 
 Reduce::Reduce(FileManagement* fileManager)
     : fileManager(fileManager) {
@@ -13,36 +12,38 @@ void Reduce::reduce() {
     std::string inputPath = fileManager->getTempDirectory() + "/sorted_aggregated_output.txt";
     std::vector<std::string> lines = fileManager->readFile(inputPath);
 
-    if (!inFile.is_open()) {
-        std::cerr << "Could not open intermediate file: " << intermediateFilePath << std::endl;
-        return;
-    }
+    for (const std::string& line : lines) {
+        std::istringstream iss(line);
+        std::string key;
+        char discard;
+        std::vector<int> values;
 
-    while (getline(inFile, line)) {
-        size_t startPos = line.find('\"') + 1; 
-        size_t endPos = line.find('\"', startPos); 
+        iss >> discard;
+        getline(iss, key, ',');
+        key.erase(std::remove_if(key.begin(), key.end(), ::isspace), key.end());
 
-        if (startPos == std::string::npos || endPos == std::string::npos) {
-            continue; 
+        if (key.empty()) {
+            std::cerr << "Found an empty key in line: " << line << std::endl;
+            continue;
         }
 
-        std::string word = line.substr(startPos, endPos - startPos);
-
-        int count = 0;
-        size_t pos = endPos;
-        while ((pos = line.find("1", pos + 1)) != std::string::npos) {
-            count++;
+        iss >> discard;
+        int num;
+        while (iss >> num) {
+            values.push_back(num);
+            iss >> discard;
         }
 
-        wordCounts[word] += count; 
+        int sum = 0;
+        for (int value : values) {
+            sum += value;
+        }
+
+        exportResult(key, sum);
     }
-
-    inFile.close();
-
-    // Export the results
-    exportResults(wordCounts);
 }
 
+program-with-documentation
 
 void Reduce::exportResults(const std::map<std::string, int>& wordCounts) {
     std::ofstream outFile(outputDirectory + "/final_results.txt");
@@ -51,7 +52,10 @@ void Reduce::exportResults(const std::map<std::string, int>& wordCounts) {
         return;
     }
 
+
+main
 void Reduce::exportResult(const std::string& key, int result) {
     std::string resultLine = "(" + key + ", " + std::to_string(result) + ")\n";
     fileManager->writeFile(outputPath, resultLine);
 }
+
