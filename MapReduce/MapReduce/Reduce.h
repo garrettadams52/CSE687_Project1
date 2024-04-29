@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <map>
+#include "MapLibrary.h"
 #include "FileManagement.h"
 
 class Reduce {

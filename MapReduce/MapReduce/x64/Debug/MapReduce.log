@@ -1,9 +1,21 @@
-﻿  Executive.cpp
-  FileManagement.cpp
-  main.cpp
-C:\Users\garrettadams\source\Repos\CSE687_Project1\MapReduce\MapReduce\FileManagement.cpp(66,12): error C2065: 'files': undeclared identifier
-  Map.cpp
-  Reduce.cpp
-  Sort.cpp
-  WorkFlow.cpp
-  Generating Code...
+﻿  Map.cpp
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(26,19): warning C4251: 'Map::outputFile': class 'std::basic_ofstream<char,std::char_traits<char>>' needs to have dll-interface to be used by clients of class 'Map'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\iosfwd(246,35): message : see declaration of 'std::basic_ofstream<char,std::char_traits<char>>'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(28,30): warning C4251: 'Map::buffer': class 'std::vector<std::string,std::allocator<std::string>>' needs to have dll-interface to be used by clients of class 'Map'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\FileManagement.h(12,10): message : see declaration of 'std::vector<std::string,std::allocator<std::string>>'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\MapReduce\Map.cpp(7,6): warning C4273: 'Map::Map': inconsistent dll linkage
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(18,5): message : see previous definition of '{ctor}'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\MapReduce\Map.cpp(16,7): warning C4273: 'Map::~Map': inconsistent dll linkage
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(19,6): message : see previous definition of '{dtor}'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\MapReduce\Map.cpp(23,11): warning C4273: 'Map::map': inconsistent dll linkage
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(20,10): message : see previous definition of 'map'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\MapReduce\Map.cpp(36,11): warning C4273: 'Map::exportToFile': inconsistent dll linkage
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(22,10): message : see previous definition of 'exportToFile'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\MapReduce\Map.cpp(43,11): warning C4273: 'Map::flushBuffer': inconsistent dll linkage
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(21,10): message : see previous definition of 'flushBuffer'
+     Creating library C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\x64\Debug\MapReduce.lib and object C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\x64\Debug\MapReduce.exp
+LINK : warning LNK4217: symbol '??0Map@@QEAA@PEAVFileManagement@@_K@Z (public: __cdecl Map::Map(class FileManagement *,unsigned __int64))' defined in 'Map.obj' is imported by 'WorkFlow.obj' in function '"public: void __cdecl Workflow::run(void)" (?run@Workflow@@QEAAXXZ)'
+LINK : warning LNK4217: symbol '??1Map@@QEAA@XZ (public: __cdecl Map::~Map(void))' defined in 'Map.obj' is imported by 'WorkFlow.obj' in function '"public: void __cdecl Workflow::run(void)" (?run@Workflow@@QEAAXXZ)'
+LINK : warning LNK4217: symbol '?map@Map@@QEAAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z (public: void __cdecl Map::map(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &))' defined in 'Map.obj' is imported by 'WorkFlow.obj' in function '"public: void __cdecl Workflow::run(void)" (?run@Workflow@@QEAAXXZ)'
+  MapReduce.vcxproj -> C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\x64\Debug\MapReduce.exe
+  The system cannot find the file specified.

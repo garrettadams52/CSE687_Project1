@@ -105,11 +105,16 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\x64\Debug</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>&lt;different options&gt;xcopy /y /d "..\..\MapLibrary\$(IntDir)MapLibrary.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -125,7 +130,11 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\x64\Debug</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>&lt;different options&gt;xcopy /y /d "..\..\MapLibrary\$(IntDir)MapLibrary.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Executive.cpp" />
@@ -139,7 +148,6 @@
   <ItemGroup>
     <ClInclude Include="Executive.h" />
     <ClInclude Include="FileManagement.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="Reduce.h" />
     <ClInclude Include="Sort.h" />
     <ClInclude Include="WorkFlow.h" />

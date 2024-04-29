@@ -3,7 +3,7 @@
 
 #include <string>
 #include "FileManagement.h"
-#include "Map.h"
+#include "MapLibrary.h"
 
 class Workflow {
 public:
