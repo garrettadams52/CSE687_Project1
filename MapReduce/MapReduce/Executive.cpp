@@ -1,4 +1,6 @@
 #include "Executive.h"
+#include "WorkFlow.h"
+#include <fstream>
 #include <iostream>
 
 Executive::Executive(const std::string& inputDir, const std::string& tempDir, const std::string& outputDir)
@@ -18,6 +20,6 @@ void Executive::markSuccess() {
     }
     else {
         std::cerr << "Failed to create SUCCESS file." << std::endl;
-    }
+    } 
 }
 

@@ -1,4 +1,4 @@
-#include "MapLibrary.h"
+#include "Map.h"
 #include <sstream>
 #include <cctype>
 #include <algorithm>
@@ -46,5 +46,4 @@ void Map::flushBuffer() {
     }
     buffer.clear();
 }
-
 
