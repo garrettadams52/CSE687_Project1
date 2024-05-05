@@ -1,8 +1,24 @@
 ﻿  Executive.cpp
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(28,19): warning C4251: 'MapLibrary::outputFile': class 'std::basic_ofstream<char,std::char_traits<char>>' needs to have dll-interface to be used by clients of class 'MapLibrary'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\iosfwd(246,35): message : see declaration of 'std::basic_ofstream<char,std::char_traits<char>>'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(30,30): warning C4251: 'MapLibrary::buffer': class 'std::vector<std::string,std::allocator<std::string>>' needs to have dll-interface to be used by clients of class 'MapLibrary'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\MapReduce\FileManagement.h(12,10): message : see declaration of 'std::vector<std::string,std::allocator<std::string>>'
   FileManagement.cpp
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(28,19): warning C4251: 'MapLibrary::outputFile': class 'std::basic_ofstream<char,std::char_traits<char>>' needs to have dll-interface to be used by clients of class 'MapLibrary'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\iosfwd(246,35): message : see declaration of 'std::basic_ofstream<char,std::char_traits<char>>'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(30,30): warning C4251: 'MapLibrary::buffer': class 'std::vector<std::string,std::allocator<std::string>>' needs to have dll-interface to be used by clients of class 'MapLibrary'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\MapReduce\FileManagement.h(12,10): message : see declaration of 'std::vector<std::string,std::allocator<std::string>>'
   main.cpp
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(28,19): warning C4251: 'MapLibrary::outputFile': class 'std::basic_ofstream<char,std::char_traits<char>>' needs to have dll-interface to be used by clients of class 'MapLibrary'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\iosfwd(246,35): message : see declaration of 'std::basic_ofstream<char,std::char_traits<char>>'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(30,30): warning C4251: 'MapLibrary::buffer': class 'std::vector<std::string,std::allocator<std::string>>' needs to have dll-interface to be used by clients of class 'MapLibrary'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\MapReduce\FileManagement.h(12,10): message : see declaration of 'std::vector<std::string,std::allocator<std::string>>'
   Reduce.cpp
   Sort.cpp
   WorkFlow.cpp
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(28,19): warning C4251: 'MapLibrary::outputFile': class 'std::basic_ofstream<char,std::char_traits<char>>' needs to have dll-interface to be used by clients of class 'MapLibrary'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\iosfwd(246,35): message : see declaration of 'std::basic_ofstream<char,std::char_traits<char>>'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\dlls\MapLibrary\MapLibrary\MapLibrary.h(30,30): warning C4251: 'MapLibrary::buffer': class 'std::vector<std::string,std::allocator<std::string>>' needs to have dll-interface to be used by clients of class 'MapLibrary'
+C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\MapReduce\FileManagement.h(12,10): message : see declaration of 'std::vector<std::string,std::allocator<std::string>>'
   Generating Code...
   MapReduce.vcxproj -> C:\Users\cmuzz\source\repos\garrettadams52\CSE687_Project1\MapReduce\x64\Debug\MapReduce.exe
