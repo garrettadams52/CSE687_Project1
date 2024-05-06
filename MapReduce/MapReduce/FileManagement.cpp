@@ -57,7 +57,6 @@ void FileManagement::clearFiles(const std::string& dirPath, const std::vector<st
                     std::cout << "Removed file: " << entry.path() << std::endl;
                 }
             }
-            std::cout << "Specific files cleared in directory: " << dirPath << std::endl;
         }
     }
     catch (const fs::filesystem_error& e) {

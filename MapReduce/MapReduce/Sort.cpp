@@ -7,8 +7,8 @@ Sort::Sort(FileManagement* fileManager)
     : fileManager(fileManager) {}
 
 void Sort::sortAndAggregate() {
-    std::string inputPath = fileManager->getTempDirectory() + "/temp_output.txt";
-    std::string outputPath = fileManager->getTempDirectory() + "/sorted_aggregated_output.txt";
+    std::string inputPath = fileManager->getTempDirectory() + "\\temp_output.txt";
+    std::string outputPath = fileManager->getTempDirectory() + "\\sorted_aggregated_output.txt";
 
     std::vector<std::pair<std::string, int>> entries;
     std::vector<std::string> lines = fileManager->readFile(inputPath);

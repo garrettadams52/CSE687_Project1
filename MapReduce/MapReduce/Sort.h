@@ -17,4 +17,4 @@ private:
     std::map<std::string, std::vector<int>> aggregateData(const std::vector<std::pair<std::string, int>>& data);
 };
 
-#endif // SORT_H
+#endif 
