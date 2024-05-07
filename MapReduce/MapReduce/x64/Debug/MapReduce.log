@@ -1,9 +1,10 @@
 ﻿  Executive.cpp
-  FileManagement.cpp
-  main.cpp
-C:\Users\garrettadams\source\Repos\CSE687_Project1\MapReduce\MapReduce\FileManagement.cpp(66,12): error C2065: 'files': undeclared identifier
-  Map.cpp
-  Reduce.cpp
+C:\Users\patri.DESKTOP-9FFPG6B\OneDrive\Desktop\Repositories\CSE687_Project1\MapReduce\MapReduce\Workflow.h(4,10): error C1083: Cannot open include file: 'IMap.h': No such file or directory
+  (compiling source file 'Executive.cpp')
+  
   Sort.cpp
   WorkFlow.cpp
+C:\Users\patri.DESKTOP-9FFPG6B\OneDrive\Desktop\Repositories\CSE687_Project1\MapReduce\MapReduce\Workflow.h(4,10): error C1083: Cannot open include file: 'IMap.h': No such file or directory
+  (compiling source file 'WorkFlow.cpp')
+  
   Generating Code...
