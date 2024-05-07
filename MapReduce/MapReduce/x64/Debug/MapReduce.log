@@ -1,10 +1,9 @@
 ﻿  Executive.cpp
+  WorkFlow.cpp
+  Generating Code...
 C:\Users\patri.DESKTOP-9FFPG6B\OneDrive\Desktop\Repositories\CSE687_Project1\MapReduce\MapReduce\Workflow.h(4,10): error C1083: Cannot open include file: 'IMap.h': No such file or directory
   (compiling source file 'Executive.cpp')
   
-  Sort.cpp
-  WorkFlow.cpp
 C:\Users\patri.DESKTOP-9FFPG6B\OneDrive\Desktop\Repositories\CSE687_Project1\MapReduce\MapReduce\Workflow.h(4,10): error C1083: Cannot open include file: 'IMap.h': No such file or directory
   (compiling source file 'WorkFlow.cpp')
   
-  Generating Code...
