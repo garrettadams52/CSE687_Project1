@@ -1,26 +1,25 @@
 #ifndef FILEMANAGEMENT_H
 #define FILEMANAGEMENT_H
 
+#include "IFileManagement.h"
 #include <string>
-#include <filesystem>
 #include <vector>
+#include <filesystem>
+#include <iostream>
 
-class FileManagement {
+class FileManagement : public IFileManagement {
 public:
     FileManagement(const std::string& inputDir, const std::string& tempDir, const std::string& outputDir);
-
-    std::vector<std::string> getAllFiles() const;
-    std::vector<std::string> readFile(const std::string& filePath) const;
-    void clearFiles(const std::string& dirPath, const std::vector<std::string>& fileNames);
-    void writeFile(const std::string& filePath, const std::string& content, bool append = true);
-    void createEmptyFile(const std::string& filePath);
+    virtual ~FileManagement() override;
 
 
-    // Getter for temporary directory
-    std::string getTempDirectory() const;
-    std::string getOutputDirectory() const;
-
-
+    virtual std::vector<std::string> getAllFiles() const override;
+    virtual std::vector<std::string> readFile(const std::string& filePath) const override;
+    virtual void clearFiles(const std::string& dirPath, const std::vector<std::string>& fileNames) override;
+    virtual void writeFile(const std::string& filePath, const std::string& content, bool append = true) override;
+    virtual void createEmptyFile(const std::string& filePath) override;
+    virtual std::string getTempDirectory() const override;
+    virtual std::string getOutputDirectory() const override;
 
 private:
     std::string inputDirectory;

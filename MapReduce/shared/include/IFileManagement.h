@@ -19,4 +19,3 @@ public:
 };
 
 #endif // IFILEMANAGEMENT_H
-
